@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>表格学习</title>
+    </head>
+    <body>
+        <div>
+
+            <table id="tab1" border="1" width="500">
+                <thead>
+                    <td>ID</td>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>张三</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>李四</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>王五</td>
+                        <td>20</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr/>
+
+            <table id="tab2" border="1" width="500">
+                <thead>
+                    <td>ID</td>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>张三</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>李四</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>王五</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>王五</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>王五</td>
+                        <td>20</td>
+                    </tr>
+                </tbody>
+            </table>
+
+		<hr/>
+		姓名：<input  type="text" id="name"/>
+		年龄：<input  type="text" id="age"/>
+		<input id="subBtn" type="submit" value="提交" />
+		<table id="tab3" border="1" width="500">
+                <thead>
+                    <td>ID</td>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>操作</td>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+
+	<script>
+	    window.onload = function () {
+	    
+	    	
+	    	//表格添加删除操作
+	    	var subBtn = document.getElementById("subBtn");
+	    	subBtn.onclick=function(){
+	    		var nameVal = document.getElementById("name").value;
+	    		var ageVal = document.getElementById("age").value;
+	    		
+	    		 var oTab3 = document.getElementById("tab3");
+	    		 var tr = document.createElement("tr");
+	    		 //第一列
+	    		 var td = document.createElement("td");
+	    		 td.innerHTML =  oTab3.tBodies[0].rows.length+1;
+	    		 tr.appendChild(td);
+	    		 //第二列
+	    		 var td = document.createElement("td");
+	    		 td.innerHTML = nameVal;
+	    		 tr.appendChild(td);
+	    		 //第三列
+	    		  var td = document.createElement("td");
+	    		 td.innerHTML = ageVal;
+	    		 tr.appendChild(td);
+	    		 //第四列
+	    		 var td = document.createElement("td");
+	    		 td.innerHTML = "<a href='#'>删除</a>";
+	    		 tr.appendChild(td);
+	    		 td.getElementsByTagName('a')[0].onclick=function(){
+	    		 	oTab3.tBodies[0].removeChild(this.parentNode.parentNode);
+	    		 };
+	    		 oTab3.tBodies[0].appendChild(tr);
+	    		 
+	    		document.getElementById("name").value="";
+	    		document.getElementById("age").value="";
+	    	}
+	    
+	        //table简单操作
+	        var oTab1 = document.getElementById("tab1");
+	        var zhangsan = oTab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[0].getElementsByTagName("td")[1].innerHTML;
+	        zhangsan = oTab1.tBodies[0].rows[0].cells[1].innerHTML;
+	        console.log("张三", zhangsan);
+
+
+	        //隔行变色
+	        var oTab2 = document.getElementById("tab2");
+	        var rows = oTab2.tBodies[0].rows;
+	        var oldColor ;
+	        for (var i = 0; i < rows.length; i++) {
+	            rows[i].onmouseover=function(){
+	                oldColor = this.style.background;
+	                this.style.background="green";
+	            };
+	            rows[i].onmouseout=function(){
+	                this.style.background=oldColor;
+	            };
+	            if (i % 2) {
+	                rows[i].style.background = "";
+	            } else {
+	                rows[i].style.background = "#ccc";
+	            }
+	        }
+	    }
+	</script>
+
+    </body>
+</html>

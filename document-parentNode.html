@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document学习</title>
+    <script>
+        window.onload=function(){
+            var aa = document.getElementsByTagName('a');
+            for (let index = 0; index < aa.length; index++) {
+                const element = aa[index];
+                element.onclick=function(){
+                    this.parentNode.style = "display:none";
+                }
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <ul id="ul1">
+        <li>123<a href="#">隐藏</a></li>
+        <li>234<a href="#">隐藏</a></li>
+        <li>345<a href="#">隐藏</a></li>
+        <li>456<a href="#">隐藏</a></li>
+        <li>567<a href="#">隐藏</a></li>
+    </ul>
+</body>
+</html>

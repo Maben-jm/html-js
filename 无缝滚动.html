@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无缝滚动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            height: 108px;
+            width: 178px;
+        }
+        #div1 {
+            width: 712px;
+            height: 108px;
+            margin: 100px auto;
+            position: relative; /*外层div是相对定位*/
+            background: red;
+            overflow: hidden;
+        }
+        #div1 ul{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div1 ul li {
+            float: left;
+            width: 178px;
+            height: 108px;
+            list-style: none;
+        }
+        #div2{
+            text-align: center;
+        }
+        #div2 a{
+            margin-left: 7px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var speed =2;
+            var oDiv1 = document.getElementById('div1');
+            var oUl = oDiv1.getElementsByTagName('ul')[0];
+            var oLi = oUl.getElementsByTagName('li');
+            oUl.innerHTML = oUl.innerHTML+oUl.innerHTML
+            oUl.style.width = oLi[0].offsetWidth*oLi.length+"px";
+            var timer = setInterval(move, 30);
+
+            oDiv1.onmouseover=function(){
+                clearInterval(timer);
+            }
+
+            oDiv1.onmouseout=function(){
+                timer = setInterval(move,30);
+            }
+
+            document.getElementsByTagName("a")[0].onclick=function(){
+                speed = -2;
+            }
+            document.getElementsByTagName("a")[1].onclick=function(){
+                speed = 2;
+            }
+
+
+
+            function move() {
+                if (Math.abs(oUl.offsetLeft)==oDiv1.offsetWidth) {
+                    oUl.style.left=0;
+                }
+                if (oUl.offsetLeft>0) {
+                    oUl.style.left=-oUl.offsetWidth/2+'px';
+                }
+                oUl.style.left = oUl.offsetLeft+speed+'px';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <ul>
+            <li><img src="img/001.jpg"/></li>
+            <li><img src="img/002.jpg"/></li>
+            <li><img src="img/003.jpg"/></li>
+            <li><img src="img/004.jpg"/></li>
+        </ul>
+    </div>
+    <div id="div2">
+        <a href="#">向左移动</a>
+        <a href="#">向右移动</a>
+    </div>
+</body>
+</html>

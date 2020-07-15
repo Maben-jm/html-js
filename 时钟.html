@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时钟页面</title>
+    <style>
+        img{
+            width: 140px;
+            height: 230px;
+            display: block;
+            float: left;
+            margin-left: 5px;
+        }
+        span{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            float: left;
+            height: 230px;
+        }
+        .box{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            showTime();
+            setInterval(showTime, 1000);
+        }
+        function showTime() {
+            var oDate = new Date();
+            var aImg = document.getElementsByTagName('img');
+            var str = ''+toDou( oDate.getHours())+toDou( oDate.getMinutes())+toDou( oDate.getSeconds())+'';
+            for (let index = 0; index < aImg.length; index++) {
+                const element = aImg[index];
+                element.src = "img/数字"+str.charAt(index)+".jpg";
+            }
+        }
+        function toDou(n) {
+            if (n<10) {
+                return '0'+n;
+            }
+            return n;
+        }
+    </script>
+</head>
+<body style="background: white;color: black;font-size: 50px;">
+    <div class="box">
+        <img src="img/数字0.jpg"/>
+        <img src="img/数字0.jpg"/>
+        <span>
+            ：
+        </span>
+        <img src="img/数字0.jpg"/>
+        <img src="img/数字0.jpg"/>
+        <span>
+            ：
+        </span>
+        <img src="img/数字0.jpg"/>
+        <img src="img/数字0.jpg"/>
+    </div>
+</body>
+</html>
