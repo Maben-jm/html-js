@@ -92,15 +92,17 @@
 	    	
 	    	//表格添加删除操作
 	    	var subBtn = document.getElementById("subBtn");
+            var oTab3 = document.getElementById("tab3");
+	    	var id = oTab3.tBodies[0].rows.length;
 	    	subBtn.onclick=function(){
 	    		var nameVal = document.getElementById("name").value;
 	    		var ageVal = document.getElementById("age").value;
-	    		
-	    		 var oTab3 = document.getElementById("tab3");
+
 	    		 var tr = document.createElement("tr");
 	    		 //第一列
 	    		 var td = document.createElement("td");
-	    		 td.innerHTML =  oTab3.tBodies[0].rows.length+1;
+	    		 td.innerHTML =  id+1;
+	    		 id++;
 	    		 tr.appendChild(td);
 	    		 //第二列
 	    		 var td = document.createElement("td");
