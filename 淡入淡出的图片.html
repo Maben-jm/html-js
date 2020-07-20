@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            #div1{
+                width: 200px;
+                height: 200px;
+                background: red;
+                /*透明度 写两个兼容一哈*/
+                filter:alpha(opacity:30);
+                opacity: 0.3;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1"></div>
+    </body>
+    <script>
+        window.onload=function () {
+            var oDiv1 = document.getElementById("div1");
+            oDiv1.onmouseover=function () {
+                startMove(100);
+            };
+            oDiv1.onmouseout=function(){
+                startMove(30);
+            }
+        };
+
+        var alpha = 30;
+        var timer = null;
+        function startMove(iTaget) {
+            var oDiv1 = document.getElementById("div1");
+            clearInterval(timer);
+            timer=setInterval(function () {
+                if (alpha===iTaget){
+                    clearInterval(timer);
+                } else {
+                    var speed = 0;
+                    if (alpha<iTaget) {
+                        speed=10;
+                    }else {
+                        speed = -10;
+                    }
+                    alpha+=speed;
+                    oDiv1.style.filter="alpha(opacity:"+alpha+")";
+                    oDiv1.style.opacity = alpha/100;
+                }
+
+            },30);
+        }
+    </script>
+</html>
