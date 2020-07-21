@@ -8,6 +8,7 @@
                 width: 100px;
                 height: 50px;
                 margin: 10px;
+                background: red;
             }
         </style>
     </head>
@@ -22,6 +23,7 @@
         window.onload=function () {
           var aDivs = document.getElementsByTagName("div");
             for (let i = 0; i < aDivs.length; i++) {
+                aDivs[i].timer=null;
                 aDivs[i].onmouseover = function(){
                     startMove(this,400)
                 };
@@ -31,11 +33,16 @@
             }
         };
 
-        var timer = null;
         function startMove(oDiv,iTarget){
-            clearInterval(timer);
-            timer = setInterval(function () {
-
+            clearInterval(oDiv.timer);
+            oDiv.timer = setInterval(function () {
+                var speed = (iTarget-oDiv.offsetWidth)/6;
+                speed = speed>0?Math.ceil(speed):Math.floor(speed);
+                if (oDiv.offsetWidth===iTarget){
+                    clearInterval(timer);
+                } else{
+                    oDiv.style.width = oDiv.offsetWidth+speed+"px";
+                }
             },30);
         }
     </script>
