@@ -26,40 +26,41 @@
         <div id="div3">字体变大</div>
         <div id="div4">颜色变化</div>
     </body>
+    <script src="js/common.js"></script>
     <script src="js/move.js"></script>
     <script>
         window.onload = function () {
             var oDiv1 = document.getElementById("div1");
             oDiv1.onmouseover = function () {
-                startMove(this, "height", 400);
+                bufferingMotion(this, "height", 400);
             };
             oDiv1.onmouseout = function () {
-                startMove(this, "height", 100);
+                bufferingMotion(this, "height", 100);
             };
 
             var oDiv2 = document.getElementById("div2");
             oDiv2.onmouseover = function () {
-                startMove(this, "width", 400);
+                bufferingMotion(this, "width", 400);
             };
             oDiv2.onmouseout = function () {
-                startMove(this, "width", 100);
+                bufferingMotion(this, "width", 100);
             };
 
 
             var div3 = document.getElementById("div3");
             div3.onmouseover = function () {
-                startMove(this, "font-size", 30);
+                bufferingMotion(this, "font-size", 30);
             };
             div3.onmouseout = function () {
-                startMove(this, "font-size", 14);
+                bufferingMotion(this, "font-size", 14);
             };
 
             var div4 = document.getElementById("div4");
             div4.onmouseover = function () {
-                startMove(this, "opacity", 100);
+                bufferingMotion(this, "opacity", 100);
             };
             div4.onmouseout = function () {
-                startMove(this, "opacity", 30);
+                bufferingMotion(this, "opacity", 30);
             };
         };
 

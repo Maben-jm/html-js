@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>仿FLASH的图片轮转效果</title>
+        <link href="css/flash.css" rel="stylesheet"/>
+        <style>
+
+            .box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="play_imgs" class="play">
+            <ul class="big_pic">
+                <div class="prev box"><span style="border: 3px solid blue;font-size: 25px;font-weight: bold">&nbsp;☜&nbsp;</span>
+                </div>
+                <div class="next box"><span style="border: 3px solid blue;font-size: 25px;font-weight: bold">&nbsp;☞&nbsp;</span>
+                </div>
+
+                <div class="text">加载图片说明。。。</div>
+                <div class="length">计算图片数量。。。</div>
+
+                <a class="mark_left" href="javascript:;"></a>
+                <a class="mark_right" href="javascript:;"></a>
+                <div class="bg"></div>
+
+                <li style="z-index: 1;"><img src="img/数字1.jpg"/></li>
+                <li><img src="img/数字2.jpg"/></li>
+                <li><img src="img/数字3.jpg"/></li>
+                <li><img src="img/数字4.jpg"/></li>
+                <li><img src="img/数字5.jpg"/></li>
+            </ul>
+            <div class="small_pic">
+                <ul style="width: 390px;">
+                    <li style="filter: alpha(100);opacity: 1;"><img src="img/数字1.jpg"/></li>
+                    <li><img src="img/数字2.jpg"/></li>
+                    <li><img src="img/数字3.jpg"/></li>
+                    <li><img src="img/数字4.jpg"/></li>
+                    <li><img src="img/数字5.jpg"/></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script src="js/common.js"></script>
+    <script src="js/move.js"></script>
+    <script>
+        window.onload = function () {
+            //左右箭头
+            var oDiv = document.getElementById("play_imgs");
+            var oBtnPrev = getByClass(oDiv, "prev")[0];
+            var oBtnNext = getByClass(oDiv, "next")[0];
+            var oMarkLeft = getByClass(oDiv, "mark_left")[0];
+            var oMarkRight = getByClass(oDiv, "mark_right")[0];
+
+            oBtnPrev.onmouseover = oMarkLeft.onmouseover = function () {
+                bufferingMotion(oBtnPrev, "opacity", 100);
+            };
+            oBtnPrev.onmouseout = oMarkLeft.onmouseout = function () {
+                bufferingMotion(oBtnPrev, "opacity", 0);
+            };
+
+            oBtnNext.onmouseover = oMarkRight.onmouseover = function () {
+                bufferingMotion(oBtnNext, "opacity", 100);
+            };
+            oBtnNext.onmouseout = oMarkRight.onmouseout = function () {
+                bufferingMotion(oBtnNext, "opacity", 0);
+            };
+
+            //大图切换
+            var bigDiv = getByClass(oDiv, "big_pic")[0];
+            var bigLis = bigDiv.getElementsByTagName("li");
+            var nowZIndex = 2;
+            var now = 0;
+            var smallDiv = getByClass(oDiv, "small_pic")[0];
+            var smallLis = smallDiv.getElementsByTagName("li");
+            for (let i = 0; i < smallLis.length; i++) {
+                smallLis[i].index = i;
+                smallLis[i].onclick = function () {
+                    if (this.index === now) {
+                        return;
+                    }
+                    now = this.index;
+                    tab();
+                };
+                smallLis[i].onmouseover = function () {
+                    bufferingMotion(this, "opacity", 100);
+                };
+                smallLis[i].onmouseout = function () {
+                    if (this.index !== now) {
+                        bufferingMotion(this, "opacity", 60);
+                    }
+                };
+            }
+
+
+            //点击上一个/下一个
+            oBtnPrev.onclick = function () {
+                now--;
+                if (now === -1) {
+                    now = smallLis.length - 1;
+                }
+                tab();
+            };
+            oBtnNext.onclick = function () {
+                now++;
+                if (now === smallLis.length) {
+                    now = 0;
+                }
+                tab();
+            };
+
+            //tab页切换效果
+            var smallUl = smallDiv.getElementsByTagName("ul")[0];
+            smallUl.style.width = smallLis.length * smallLis[0].offsetWidth + "px";
+            function tab() {
+                //处理展示到首层
+                bigLis[now].style.zIndex = nowZIndex++;
+                //处理缓冲下滑现象
+                bigLis[now].style.height = "0";
+                bufferingMotion(bigLis[now], "height", 320);
+                //处理点击透明度问题
+                for (let j = 0; j < smallLis.length; j++) {
+                    bufferingMotion(smallLis[j], "opacity", 60);
+                }
+                bufferingMotion(smallLis[now], "opacity", 100);
+                //处理小ul轮转
+                if (now===0){
+                    bufferingMotion(smallUl,"left",0)
+                }else if (now===(smallLis.length-1)){
+                    bufferingMotion(smallUl, "left", -(now - 2) * smallLis[0].offsetWidth)
+                } else {
+                    bufferingMotion(smallUl, "left", -(now - 1) * smallLis[0].offsetWidth)
+                }
+            };
+            
+            var timer = setInterval(oBtnNext.onclick,2000);
+            oDiv.onmouseover=function () {
+                clearInterval(timer);
+            };
+            oDiv.onmouseout=function () {
+                timer = setInterval(oBtnNext.onclick,2000);
+            };
+        };
+    </script>
+</html>

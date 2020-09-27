@@ -1,33 +1,37 @@
 /**
  * 缓冲运动
  * @param obj 运动对象
- * @param attr 运动元素(left,right,top,opacity...)
- * @param iTarget 目标
+ * @param json 运动元素和目标 {width:100,opacity:100}
  * @param funEnd  运动结束执行的方法(链式运动)
  */
-function bufferingMotion(obj, attr, iTarget,funEnd) {
+function bufferingMotion(obj, json, funEnd) {
     clearInterval(obj.timer);
     obj.timer = setInterval(function () {
-        var cur;
-        if (attr === "opacity") {
-            cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
-        } else {
-            cur = parseInt(getStyle(obj, attr));
-        }
-        var speed = (iTarget - cur) / 6;
-        speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
-        if (iTarget === cur) {
-            clearInterval(obj.timer);
-            if (funEnd){
-                funEnd();
+        var bStop = true;
+        for (var attr in json) {
+            var cur;
+            if (attr === "opacity") {
+                cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+            } else {
+                cur = parseInt(getStyle(obj, attr));
             }
-        } else {
+            var speed = (json[attr] - cur) / 6;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            if (json[attr] !== cur) {
+                bStop = false;
+            }
             if (attr === 'opacity') {
                 var alpha = cur + speed;
                 obj.style.filter = "alpha(opacity:" + alpha + ")";
                 obj.style.opacity = alpha / 100;
             } else {
                 obj.style[attr] = cur + speed + "px";
+            }
+        }
+        if (bStop){
+            clearInterval(obj.timer);
+            if (funEnd){
+                funEnd();
             }
         }
     }, 30);
@@ -40,7 +44,7 @@ function bufferingMotion(obj, attr, iTarget,funEnd) {
  * @param iTarget 目标
  * @param speedIn 速度
  */
-function uniformMotion(obj,attr,iTarget,speedIn) {
+function uniformMotion(obj, attr, iTarget, speedIn) {
     clearInterval(obj.timer);
     obj.timer = setInterval(function () {
         var cur;
@@ -53,7 +57,7 @@ function uniformMotion(obj,attr,iTarget,speedIn) {
         if (cur > iTarget) {
             speed = -speed;
         }
-        if (Math.abs(cur-iTarget)<Math.abs(speed)){
+        if (Math.abs(cur - iTarget) < Math.abs(speed)) {
             speed = 1;
         }
         if (iTarget === cur) {
