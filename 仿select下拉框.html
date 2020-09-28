@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>仿select下拉框</title>
+        <style>
+            #div1{
+                width: 100px;
+                height: 100px;
+                background: #cccccc;
+                display: none;
+            }
+            #div2{
+                width: 100px;
+                height: 100px;
+                background: #000;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="btn1" type="button" value="显示" />
+        <div id="div1"></div>
+        <div id="div2"></div>
+    </body>
+    <script>
+        window.onload=function () {
+            var btn1 = document.getElementById("btn1");
+            btn1.onclick = function () {
+                document.getElementById("div1").style.display="block";
+                //取消冒泡
+                event.cancelBubble=true;
+            };
+            document.onclick=function () {
+                document.getElementById("div1").style.display="none";
+            }
+        }
+    </script>
+</html>

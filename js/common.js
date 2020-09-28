@@ -4,14 +4,14 @@
  * @param className className
  * @returns {Array}
  */
-function getByClass(oParent,className){
+function getByClass(oParent, className) {
     var aResult = [];
     var aEle = oParent.getElementsByTagName('*');
-    for(var i=0;i<aEle.length;i++){
+    for (var i = 0; i < aEle.length; i++) {
         var clazz = aEle[i].className;
         var aClazz = clazz.split(" ");
-        for (var j = 0; j <aClazz.length; j++) {
-            if(aClazz[j]==className){
+        for (var j = 0; j < aClazz.length; j++) {
+            if (aClazz[j] == className) {
                 aResult.push(aEle[i]);
             }
         }
@@ -32,4 +32,13 @@ function getStyle(obj, name) {
     } else {
         return getComputedStyle(obj, false)[name];
     }
+}
+
+function getPosition(ev) {
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+    return {
+        x: ev.clientX + scrollLeft,
+        y: ev.clientY + scrollTop
+    };
 }

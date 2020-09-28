@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>一串跟着鼠标的div</title>
+        <style>
+            div {
+                width: 10px;
+                height: 10px;
+                position: absolute;
+                background: red;
+            }
+        </style>
+        <script src="js/common.js"></script>
+        <script>
+            window.onload = function () {
+                document.onmousemove = function (ev) {
+                    var divs = document.getElementsByTagName("div");
+                    var oEvent = ev || event;
+                    var pos = getPosition(oEvent);
+
+                    divs[0].style.left = pos.x + "px";
+                    divs[0].style.top = pos.y + "px";
+                    for (let i = divs.length - 1; i >= 0; i--) {
+                        divs[i].style.left = divs[i - 1].offsetLeft + "px";
+                        divs[i].style.top = divs[i - 1].offsetTop + "px";
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </body>
+</html>

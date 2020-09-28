@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>键盘事件</title>
+        <style>
+            #div1 {
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                background: red;
+            }
+
+            #div2 {
+                margin: 10px auto;
+                position: absolute;
+                top: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1"></div>
+        <div id="div2">
+            <input id="text" style="margin-bottom: 10px;display: block;" />
+            <textarea id="textarea" cols="50" rows="30"></textarea>
+        </div>
+    </body>
+    <script>
+
+        window.onload = function () {
+            var text = document.getElementById("text");
+            var textarea = document.getElementById("textarea");
+            text.onkeydown=function (ev) {
+                var oEvent = ev||event;
+                //发言ctrl+enter
+                if (oEvent.keyCode===13 && oEvent.ctrlKey){
+                    textarea.value+=text.value+'\n';
+                    text.value="";
+                }
+                //回车发言
+                // if (oEvent.keyCode===13){
+                //     textarea.value+=text.value+'\n';
+                //     text.value="";
+                // }
+            }
+        };
+        /////////////////////////////////////////////////////
+        document.onkeydown = function (ev) {
+            var oEvent = ev || event;
+            var div1 = document.getElementById("div1");
+            if (oEvent.keyCode === 37) {
+                div1.style.left = div1.offsetLeft - 10 + "px";
+            } else if (oEvent.keyCode === 39) {
+                div1.style.left = div1.offsetLeft + 10 + "px";
+            }
+        }
+    </script>
+</html>
