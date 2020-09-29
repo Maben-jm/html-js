@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>只能输入数字</title>
+    </head>
+    <body>
+        <input type="text" id="txt1">
+    </body>
+    <script>
+        window.onload=function () {
+            var txt1 = document.getElementById("txt1");
+            txt1.oninput=function () {
+                var txt1Val = txt1.value;
+                var reg = /^[0-9]*$/g;
+                var pattern=new RegExp(reg);
+                var flag = pattern.test(txt1Val);
+                if (!flag){
+                    alert("要求必须是纯数字啊!!!");
+                }
+            }
+        }
+
+        //bug :中文也能输入拦截不了
+        // window.onload=function () {
+        //     var txt1 = document.getElementById("txt1");
+        //     txt1.onkeydown=function (ev) {
+        //         var oEvent = ev||event;
+        //         var keyCode = oEvent.keyCode;
+        //         if (keyCode<48 || keyCode>57){
+        //             return false;
+        //         }
+        //     }
+        // }
+    </script>
+</html>

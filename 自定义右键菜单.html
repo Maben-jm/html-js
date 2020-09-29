@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>默认事件</title>
+        <style>
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            #div1 {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                background: #ccc;
+                border: 1px solid black;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </body>
+    <script src="js/common.js"></script>
+    <script>
+
+        document.onclick=function(){
+            var div1 = document.getElementById("div1");
+            div1.style.display="none";
+        };
+
+        document.oncontextmenu = function (ev) {
+            var oEvent = ev || event;
+            var pos = getPosition(oEvent);
+            var div1 = document.getElementById("div1");
+            div1.style.left = pos.x + "px";
+            div1.style.top = pos.y + "px";
+            div1.style.display="block";
+            return false;
+        }
+
+        //阻止右键菜单
+        // document.oncontextmenu=function () {
+        //     return false;
+        // }
+    </script>
+</html>
