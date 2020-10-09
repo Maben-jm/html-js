@@ -34,6 +34,11 @@ function getStyle(obj, name) {
     }
 }
 
+/**
+ * 获取鼠标的X/Y轴
+ * @param ev 事件var oEvent = ev || event;
+ * @returns {{x: number, y: number}}
+ */
 function getPosition(ev) {
     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
@@ -41,4 +46,20 @@ function getPosition(ev) {
         x: ev.clientX + scrollLeft,
         y: ev.clientY + scrollTop
     };
+}
+
+/**
+ * 绑定事件扩展
+ * @param oParent 绑定事件的元素
+ * @param eventName 事件名称(不带on)
+ * @param func 绑定函数
+ */
+function boundEvent(oParent,eventName,func){
+    if (oParent.attachEvent){
+        // IE
+        oParent.attachEvent("on"+eventName,func);
+    } else{
+        // FIREFOX  || CHROME
+        oParent.addEventListener(eventName,func,false);
+    }
 }

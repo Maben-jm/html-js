@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>绑定事件学习</title>
+    </head>
+    <body>
+        <input type="button" id="btn" value="按钮"/>
+    </body>
+    <script src="js/common.js"></script>
+    <script>
+        window.onload=function () {
+            var btn = document.getElementById("btn");
+
+            boundEvent(btn,"click",function () {
+                alert("哈哈哈");
+            });
+
+            boundEvent(btn,"click",function () {
+                alert("嘻嘻嘻");
+            });
+
+            //attachEvent(事件名,函数)  -->> IE
+            // btn.attachEvent("onclick",function () {
+            //     alert("attachEvent");
+            // });
+            // addEventListener  -->> firefox chrome
+            // btn.addEventListener("click",function () {
+            //     alert("addEventListener");
+            // },false);
+        }
+    </script>
+</html>

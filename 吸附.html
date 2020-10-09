@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>拖拽</title>
+        <style>
+            #div1 {
+                width: 100px;
+                height: 100px;
+                background: red;
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1"></div>
+    </body>
+    <script src="js/common.js"></script>
+    <script>
+        window.onload = function () {
+            var div1 = document.getElementById("div1");
+            var disX = 0;
+            var disY = 0;
+            div1.onmousedown = function (ev) {
+                var oEvent = ev || event;
+                var pos = getPosition(oEvent);
+                disX = pos.x - div1.offsetLeft;
+                disY = pos.y - div1.offsetTop;
+
+                document.onmousemove = function (ev) {
+                    var oEvent = ev || event;
+                    var pos = getPosition(oEvent);
+                    var x = pos.x - disX;
+                    var y = pos.y - disY;
+                    //让div不出去
+                    if (x < 50) {
+                        //左边出不去
+                        x = 0;
+                    } else if (x > document.documentElement.clientWidth - div1.offsetWidth - 50) {
+                        //右出不去
+                        x = document.documentElement.clientWidth - div1.offsetWidth;
+                    }
+                    if (y < 50) {
+                        //上出不去
+                        y = 0;
+                    } else if (y > document.documentElement.clientHeight - div1.offsetHeight - 50) {
+                        //下出不去
+                        y = document.documentElement.clientHeight - div1.offsetHeight;
+                    }
+
+                    div1.style.left = x + "px";
+                    div1.style.top = y + "px";
+                };
+
+                //阻止默认事件 --> 火狐bug
+                return false;
+            };
+            document.onmouseup = function () {
+                if (document.onmousemove) {
+                    document.onmousemove = null;
+                }
+            }
+        }
+
+    </script>
+</html>
