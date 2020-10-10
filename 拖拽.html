@@ -51,8 +51,8 @@
                 if (this.onmousemove) {
                     this.onmousemove = null;
                     this.onmouseup = null;
-                    if (div1.releaseCapture) {
-                        div1.releaseCapture()
+                    if (this.releaseCapture) {
+                        this.releaseCapture()
                     }
                 }
             }

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>拖拽</title>
+        <style>
+            #div1 {
+                width: 100px;
+                height: 100px;
+                background: #cccccc;
+                position: absolute;
+            }
+
+            .box {
+                border: 1px dashed red;
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1"></div>
+    </body>
+    <script src="js/common.js"></script>
+    <script>
+        window.onload = function () {
+            var div1 = document.getElementById("div1");
+            var disX = 0;
+            var disY = 0;
+            div1.onmousedown = function (ev) {
+                var oEvent = ev || event;
+                var pos = getPosition(oEvent);
+                disX = pos.x - div1.offsetLeft;
+                disY = pos.y - div1.offsetTop;
+
+                //创建一个虚拟的框
+                var box = document.createElement("div");
+                box.className="box";
+                box.style.width=div1.offsetWidth+"px";
+                box.style.height=div1.offsetHeight+"px";
+                box.style.left=div1.offsetLeft+"px";
+                box.style.top=div1.offsetTop+"px";
+                document.body.appendChild(box);
+
+                if (box.setCapture) {
+                    //IE
+                    box.onmousemove = function (ev) {
+                        mouseMove(ev);
+                    };
+                    box.setCapture();
+                    box.onmouseup = mouseUp;
+                } else {
+                    document.onmousemove = function (ev) {
+                        mouseMove(ev);
+                    };
+                    document.onmouseup = mouseUp;
+                }
+                //阻止默认事件
+                return false;
+
+                function mouseUp() {
+                    console.log(this);
+                    if (this.onmousemove) {
+                        this.onmousemove = null;
+                        this.onmouseup = null;
+                        div1.style.left=box.offsetLeft+"px";
+                        div1.style.top=box.offsetTop+"px";
+                        document.body.removeChild(box);
+                        if (this.releaseCapture) {
+                            this.releaseCapture()
+                        }
+                    }
+                }
+
+                function mouseMove(ev) {
+                    var oEvent = ev || event;
+                    var pos = getPosition(oEvent);
+                    var x = pos.x - disX;
+                    var y = pos.y - disY;
+
+                    //让div不出去
+                    if (x < 0) {
+                        //左边出不去
+                        x = 0;
+                    } else if (x > document.documentElement.clientWidth - div1.offsetWidth) {
+                        //右出不去
+                        x = document.documentElement.clientWidth - div1.offsetWidth;
+                    }
+                    if (y < 0) {
+                        //上出不去
+                        y = 0;
+                    } else if (y > document.documentElement.clientHeight - div1.offsetHeight) {
+                        //下出不去
+                        y = document.documentElement.clientHeight - div1.offsetHeight;
+                    }
+
+                    box.style.left = x + "px";
+                    box.style.top = y + "px";
+                }
+            };
+
+
+        }
+
+    </script>
+</html>
