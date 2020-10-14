@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>组件测试</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app1">
+            <ol>
+                <todo-item1></todo-item1>
+            </ol>
+        </div>
+        <hr/>
+
+        <div id="app2">
+            <ol>
+                <!--
+                  现在我们为每个 todo-item 提供 todo 对象
+                  todo 对象是变量，即其内容可以是动态的。
+                  我们也需要为每个组件提供一个“key”，稍后再
+                  作详细解释。
+                -->
+                <todo-item2
+                        v-for="item in groceryList"
+                        v-bind:b="item"
+                        v-bind:a="item"
+                ></todo-item2>
+            </ol>
+        </div>
+    </body>
+    <script src="component.js"></script>
+    <script>
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                groceryList: [
+                    {id: 0, text: '蔬菜'},
+                    {id: 1, text: '奶酪'},
+                    {id: 2, text: '随便其它什么人吃的东西'}
+                ]
+            }
+        });
+
+        var app = new Vue({
+            el: "#app1"
+        });
+    </script>
+</html>
