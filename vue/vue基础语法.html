@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue基础语法</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>双向绑定</h2>
+		<div id="app">
+			<p>{{message}}</p>
+			可以使用v-model绑定变量:<input v-model="message" style="width: 300px;"/>
+		</div>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>if语句</h2>
+		<div id="app2">
+			<span v-if="see">这里是if条件</span>
+		</div>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>for语句</h2>
+		<div id="app3">
+			<ul>
+				<li v-for="todo in todos">
+					{{todo.text}}
+				</li>
+			</ul>
+		</div>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>事件绑定</h2>
+		<div id="app4">
+			<p>{{ message }}</p>
+			<button @click="showDate">click事件</button>
+		</div>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>组件</h2>
+		<p><xmp>子单元通过 prop 接口与父单元进行了良好的解耦。我们现在可以进一步改进 <todo-item> 组件，提供更为复杂的模板和逻辑，而不会影响到父单元。</xmp></p>
+		<div id="app5">
+			<ul>
+				<my-componet-name v-for="todo in todos" v-bind:item="todo"></my-componet-name>
+			</ul>
+		</div>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>vue的声明钩子</h2>
+		<img src="../img/vue-lifecycle.png"/>
+	</body>
+</html>
+<script>
+	window.onload = function() {
+		setInterval(function() {
+			app.message = '双向绑定===>>>' + new Date().toLocaleString();
+		}, 1000)
+		setTimeout(function() {
+			app2.see = !app2.see;
+			app3.todos.push({
+				text: "<span color='red'>" + new Date().toLocaleString() + "</span>" //不能识别HTML标签
+			});
+		}, 3000)
+	};
+	Vue.component('my-componet-name',{
+		props:['item'],
+		template:'<li>{{item}}</li>'
+	});
+	new Vue({
+		el:"#app5",
+		data:{
+			todos:[
+				"1",
+				"2",
+				"3"
+			]
+		}
+	});
+	var app4 = new Vue({
+		el: "#app4",
+		data : {
+			message: "vue绑定事件方式\"v-on || @ \" 两种方式,vue的方法写在methods中"
+		},
+		methods: {
+			showDate: function() {
+				this.message = this.message +"--->>>"+ new Date().toLocaleString();
+			}
+		}
+	});
+	var app3 = new Vue({
+		el: '#app3',
+		data: {
+			todos: [{
+					text: '学习 JavaScript'
+				},
+				{
+					text: '学习 Vue'
+				},
+				{
+					text: '整个牛项目'
+				}
+			]
+		}
+	});
+	var app2 = new Vue({
+		el: '#app2',
+		data: {
+			see: true
+		}
+	});
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: 'Hello Vue!!'
+		}
+	});
+</script>

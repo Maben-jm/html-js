@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue模板语法</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<h2>双向绑定相关</h2>
+			<div>
+				<p>Message: {{ msg }}</p>
+				<p v-once>使用<span style="color: red;">v-once</span>这个将不会改变: {{ msg }}</p>
+				<p>使用<span style="color: red;">v-html</span>这个会去解释html标签: <span v-html="rawHtml"></span>; 你的站点上动态渲染的任意 HTML 可能会非常危险，因为它很容易导致 XSS 攻击。</p>
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<h2>HTML属性</h2>
+			<div>
+				<p>Mustache 语法不能作用在 HTML attribute 上，遇到这种情况应该使用 <span style="color: red;">v-bind</span> 指令：</p>
+				 可以操作app.isButtonDisabled这个试一试:<button v-bind:disabled="isButtonDisabled">Button</button>
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<h2>HTML事件</h2>
+			<div>
+				<p>vue中使用<span style="color: red;">v-bind</span>来绑定事件</p> 
+				<p>从 2.6.0 开始，vue支持对事件动态监听,使用<span style="color: red;">{{msg2}}</span>来操作,但是好像不实用!</p>
+			</div>
+		</div>
+
+	</body>
+</html>
+<script>
+	setInterval(function() {
+		app.msg = '这里是永久绑定===>>>' + new Date().toLocaleString();
+	}, 1000)
+	var app = new Vue({
+		el: "#app",
+		data: {
+			msg: '这里是永久绑定',
+			msg2:"<a v-on:[eventName]=\"doSomething\"> ... </a>",
+			rawHtml: "<span style='color:red;'>red color</span>",
+			isButtonDisabled:false
+		}
+	});
+</script>

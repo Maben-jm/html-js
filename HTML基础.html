@@ -41,6 +41,19 @@
 				outline: 0;
 				cursor: pointer;/*小手*/
 			}
+			.i_btn2{
+				color: #000;
+				background: rgb(251,251,251);
+				border: 1px solid #DCDCDC;
+				line-height: 35px;
+				min-width: 120px;
+				text-align: center;
+				padding: 0 14px;
+				margin: 0 3px 0 2px;
+				border-radius: 5px;/*边角曲化*/
+				outline: 0;
+				cursor: pointer;/*小手*/
+			}
         </style>
 	</head>
 	<body>
@@ -199,6 +212,7 @@
 				<td colspan="2">
 					<div class="box">
 						<input type="button" value="submit" class="i_btn" onclick="qt()" />
+						<input type="button" value="按钮2" class="i_btn2" />
 					</div>
 				</td>
 			</tr>
@@ -223,7 +237,7 @@
 		}
 
 		window.onload = function() {
-			
+
 			//将页面中单选框修改成都可以取消
 			var inputs = document.getElementsByTagName("input");
 			for (var i = 0; i < inputs.length; i++) {
@@ -231,7 +245,7 @@
 				if (input.type == "radio") {
 					input.onclick = function() {
 						var domName = this.name;
-						if (this.getAttribute('waschecked') && this.getAttribute('waschecked') =='true') {
+						if (this.getAttribute('waschecked') && this.getAttribute('waschecked') == 'true') {
 							this.setAttribute("waschecked", false);
 							this.checked = false;
 						} else {
