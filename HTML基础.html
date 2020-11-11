@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>基础学习</title>
+		<style>
+
+			table, tr, td, th {
+                border: 1px solid #CCCCCC;
+            }
+			table{
+				border-spacing: 0;
+				border-collapse: collapse;
+			}
+			tr{
+				height: 38px;
+			}
+
+			#table1, #table1 tr td, #table1 tr th {
+                border: 3px solid green;
+            }
+
+			.box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+			
+			.i_btn{
+				background-image: url(./img/i_btn.png);
+				background-repeat: repeat-x;
+				color: #000;
+				border: 1px solid #DCDCDC;
+				line-height: 35px;
+				min-width: 120px;
+				text-align: center;
+				padding: 0 14px;
+				border-radius: 5px;/*边角曲化*/
+				margin-left: 2px;
+				margin-right: 3px;
+				outline: 0;
+				cursor: pointer;/*小手*/
+			}
+        </style>
+	</head>
+	<body>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>定义列表学习</h2>
+		<dl>
+			<dt>
+				定义条目
+			</dt>
+			<dd>
+				定义描述
+			</dd>
+		</dl>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>表格</h2>
+		<table id="table1" style="width: 300px;text-align: center;">
+			<caption>这里是表格标题</caption>
+			<tr>
+				<th>id</th>
+				<th>姓名</th>
+				<th>年龄</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>马奔</td>
+				<td>28</td>
+			</tr>
+		</table>
+		<table id="table2" border="1" style="width: 900px;text-align: center;">
+			<caption>这里是表格标题</caption>
+			<!--<colgroup>-->
+			<!--<col span="1" style="background: red;">-->
+			<!--<col span="1" style="background: green;">-->
+			<!--<col span="1" style="background: #cccccc">-->
+			<!--<col span="2" style="background: goldenrod;">-->
+			<!--</colgroup>-->
+			<colgroup>
+				<col style="width: 10%;background: red;">
+				<col style="width: 20%;background: goldenrod;">
+				<col style="width: 10%;background: green;">
+				<col style="width: 10%;background: green;">
+				<col style="width: 50%;background: aquamarine;">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>性别</th>
+					<th>简介</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>马奔</td>
+					<td>28</td>
+					<td>男</td>
+					<td>简介啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>form表单</h2>
+		<form id="form1" method="get" action="https://www.baidu.com/s">
+			<p>搜索关键字:<input type="text" name="wd" id="wd" /></p>
+			<p><input type="submit" value="提交"></p>
+		</form>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>form表单</h2>
+		<form id="form2" method="get" action="#">
+			<fieldset>
+				<p>搜索关键字:<input type="text" name="wd" id="111d" /></p>
+			</fieldset>
+			<fieldset>
+				<p><label for="username">用户名</label></p>
+				<p><input type="text" id="username" name="username" /></p>
+			</fieldset>
+			<p><input type="submit" value="提交"></p>
+		</form>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>from+table</h2>
+		<form id="form2" method="get" action="https://www.baidu.com/s">
+			<table id="table3" style="background: white;margin: 10px;width: 500px;height: 60px;">
+				<tr>
+					<th>搜索关键字</th>
+					<td>
+						<input name="dd" id="dd" type="text" value="请输入关键字" onblur="if(this.value =='' || this.value.trim()=='' ) {this.value = '请输入关键字';this.style.color='#737e73';}"
+						 onfocus="if(this.value == '请输入关键字'){ this.value = '';this.style.color='black'}" style="width: 99%;height: 100%;border: 0px;color:#737e73;"
+						 onkeydown="enterEv()" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="box">
+							<input type="button" value="submit" class="i_btn" onclick="javascript:var form = document.getElementById('form2');form.submit();" />
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<hr style="margin: 15px 0;background: red;height: 2px;" />
+		<h2>其他</h2>
+		<table id="table4" style="background: white;margin: 10px;width: 500px;height: 60px;">
+			<tr>
+				<th>搜索关键字</th>
+				<td>
+					<input name="ss" id="ss" type="text" value="请输入关键字" onblur="if(this.value =='' || this.value.trim()=='' ) {this.value = '请输入关键字';this.style.color='#737e73';}"
+					 onfocus="if(this.value == '请输入关键字'){ this.value = '';this.style.color='black'}" style="width: 99%;height: 100%;border: 0px;color:#737e73;"
+					 onkeydown="enterEv()" />
+				</td>
+			</tr>
+			<tr>
+				<th>单选框</th>
+				<td>
+					男<input type="radio" name="sex" value="1" />
+					女<input type="radio" name="sex" value="2" />
+				</td>
+			</tr>
+			<tr>
+				<th>复选框</th>
+				<td>
+					篮球
+				</td>
+			</tr>
+			<tr>
+				<th>下拉框-基础</th>
+				<td>
+					<select id="sel" name="sel" autocomplete="off" style="color: #737e73;width: 100%;height: 100%;border: 0;" onchange="if(this.options[this.selectedIndex].value!=''){this.style.color='black'}else{this.style.color='#737e73'}">
+						<option value="" style="color:#737e73;">--请选择--</option>
+						<option value="1" style="color:black;">这是1</option>
+						<option value="2" style="color:black;">这是2</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>下拉框-层级</th>
+				<td>
+					<select id="sel2" name="sel2" autocomplete="off" style="color: #737e73;width: 100%;height: 100%;border: 0;"
+					 onchange="if(this.options[this.selectedIndex].value!=''){this.style.color='black'}else{this.style.color='#737e73'}">
+						<option value="" style="color:#737e73;">--请选择--</option>
+						<optgroup label="一大类">
+							<option value="11" style="color:#737e73;" disabled="disabled">这是11</option>
+							<option value="12" style="color:black;">这是12</option>
+						</optgroup>
+						<optgroup label="二大类">
+							<option value="21" style="color:black;">这是21</option>
+							<option value="22" style="color:black;">这是22</option>
+						</optgroup>
+						<option value="1" style="color:black;">这是1</option>
+						<option value="2" style="color:black;">这是2</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div class="box">
+						<input type="button" value="submit" class="i_btn" onclick="qt()" />
+					</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+	<script src="js/common.js"></script>
+	<script>
+		function qt() {
+			console.log("单选框===>>>", getRadioVal(document, 'sex'));
+			console.log("下拉框1===>>>", getSelectVal(document, 'sel'));
+			console.log("下拉框2===>>>", getSelectVal(document, 'sel2'));
+			console.log("下拉框2===>>>", getSelectVal(document, 'sel3'));
+		}
+
+		function enterEv(ev) {
+			var oEvent = ev || event;
+			var keyCode = oEvent.keyCode;
+			if (keyCode === 13) {
+				var form = document.getElementById("form2");
+				form.submit();
+			}
+		}
+
+		window.onload = function() {
+			
+			//将页面中单选框修改成都可以取消
+			var inputs = document.getElementsByTagName("input");
+			for (var i = 0; i < inputs.length; i++) {
+				var input = inputs[i];
+				if (input.type == "radio") {
+					input.onclick = function() {
+						var domName = this.name;
+						if (this.getAttribute('waschecked') && this.getAttribute('waschecked') =='true') {
+							this.setAttribute("waschecked", false);
+							this.checked = false;
+						} else {
+							//选中之前先将所有的radio变为false
+							var radios = document.getElementsByName(domName);
+							for (var i = 0; i < radios.length; i++) {
+								var radio = radios[i]
+								radio.setAttribute("waschecked", false);
+							}
+							this.setAttribute("waschecked", true);
+							this.checked = true;
+						}
+					}
+				}
+			}
+		}
+	</script>
+</html>
