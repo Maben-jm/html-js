@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue-form</title>
+		<link rel="shortcut icon" type="images/x-icon" href="../img/笑脸.png" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<div>
+				<!-- for执行的是id,所以要有id -->
+				<label for="xm">姓名:</label>
+				<input v-model="xm" id="xm" placeholder="请输入姓名" />
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<div>
+				<label for="jj">简介:</label>
+				<textarea v-model="jj" id="jj" placeholder="请输入简介"></textarea>
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<div>
+				<label>爱好:</label>
+				<input type="checkbox" v-model="ah" value="1">篮球
+				<input type="checkbox" v-model="ah" value="2">足球
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<div>
+				<label>性别:</label>
+				<input type="radio" id="man" value="1" v-model="sex">
+				<label for="man">男</label>
+				<input type="radio" id="woman" value="2" v-model="sex">
+				<label for="woman">女</label>
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<div>
+				<label>出行方式:</label>
+				<select v-model="selected">
+					<option disabled value="">---请选择---</option>
+					<option>坐车</option>
+					<option>坐火车</option>
+					<option>坐灰机</option>
+				</select>
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<div>
+				<p>测试value值也是由后台提供app.pick==>>>app.a</p>
+				<input type="radio" v-model="pick" v-bind:value="a">
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<div>
+				<p>在文本的使用中最好加上trim去两边的空格(v-model.trim)===>>>app.wd</p>
+				<input type="text" v-model.trim="wd" >
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+	var app = new Vue({
+		el: "#app",
+		data: {
+			xm: "",
+			jj: "",
+			ah: [],
+			sex: "",
+			selected: "",
+			pick: "",
+			a: "1",
+			wd:""
+		}
+	});
+</script>

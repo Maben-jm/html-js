@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue计算相关</title>
+		<link rel="shortcut icon" type="images/x-icon" href="../img/笑脸.png" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h2>methods中:{{getNow()}}</h2>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<h2>计算属性</h2>
+			<div>
+				<p>计算属性是放到<span style="color: red;">computed</span>中的,用于实时计算的属性,例如:</p>
+				<input v-model="arg1" type="number" style="width: 40px;" />
+				<span style="font-size: 14px;">+</span>
+				<input v-model="arg2" value="2" type="number" style="width: 40px;" />
+				<span style="font-size: 14px;"> = </span>
+				{{xxx}}
+				<p>当然,计算方法也可以放到method中,我们可以将同一函数定义为一个方法而不是一个计算属性。</p>
+				<p>两种方式的最终结果确实是完全相同的。</p>
+				<p>然而，<span style="color: #0000FF;">不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。</span></p>
+				<p>这就意味着只要条件还没有发生改变，多次访问计算方法计算属性会立即返回之前的计算结果，而不必再次执行函数。</p>
+				<p>相比之下，每当触发重新渲染时，调用方法将总会再次执行函数。例如修改上面的加法,两个时间methods中的跟着变,而computed中的不变!!!</p>
+				<p>{{getNow2}}</p>
+			</div>
+			<hr style="margin: 15px 0;background: red;height: 2px;" />
+			<h2>监听属性</h2>
+			<div>
+				<p>watch:{{question}}</p>
+				<p>answer:{{ answer }}</p>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var app = new Vue({
+		el: "#app",
+		data: {
+			arg1: 1,
+			arg2: 2,
+			question:"app.question监听的是这一个变量",
+			answer:""
+		},
+		methods: {
+			getNow: function() {
+				return new Date();
+			}
+		},
+		computed: {
+			xxx: function() {
+				if (!this.arg1 && !this.arg2) {
+					return "和";
+				}
+				if (!this.arg1) {
+					return this.arg2;
+				}
+				if (!this.arg2) {
+					return this.arg1;
+				}
+				return parseInt(this.arg1) + parseInt(this.arg2);
+			},
+			getNow2:function(){
+				return new Date();
+			}
+		},
+		watch:{
+			question:function(){
+				this.answer = new Date();
+			}
+		}
+	});
+</script>
